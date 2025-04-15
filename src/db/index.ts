@@ -1,5 +1,9 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { advocates, advocatesRelations } from "./schema/advocates";
+import { specialties, specialtiesRelations } from "./schema/specialties";
+import { advocateSpecialties, advocateSpecialtiesRelations } from "./schema/advocateSpecialties";
+
 
 const initDb = () => {
   if (!process.env.DATABASE_URL) {
@@ -9,7 +13,16 @@ const initDb = () => {
   }
 
   const queryClient = postgres(process.env.DATABASE_URL);
-  const db = drizzle(queryClient);
+  const db = drizzle(queryClient, {
+    schema: {
+      advocates,
+      specialties,
+      advocatesRelations,
+      specialtiesRelations,
+      advocateSpecialties,
+      advocateSpecialtiesRelations
+    }
+  });
 
   return db;
 };

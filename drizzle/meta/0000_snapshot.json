@@ -1,9 +1,66 @@
 {
-  "id": "48316edf-dd4a-489c-a565-e71d59facfd3",
+  "id": "b9708f0a-ea31-44b0-ae67-605a74d6830f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.advocate_specialties": {
+      "name": "advocate_specialties",
+      "schema": "",
+      "columns": {
+        "advocate_id": {
+          "name": "advocate_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "specialty_id": {
+          "name": "specialty_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "advocate_specialties_advocate_id_advocates_id_fk": {
+          "name": "advocate_specialties_advocate_id_advocates_id_fk",
+          "tableFrom": "advocate_specialties",
+          "tableTo": "advocates",
+          "columnsFrom": [
+            "advocate_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "advocate_specialties_specialty_id_specialties_id_fk": {
+          "name": "advocate_specialties_specialty_id_specialties_id_fk",
+          "tableFrom": "advocate_specialties",
+          "tableTo": "specialties",
+          "columnsFrom": [
+            "specialty_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "advocate_specialties_advocate_id_specialty_id_pk": {
+          "name": "advocate_specialties_advocate_id_specialty_id_pk",
+          "columns": [
+            "advocate_id",
+            "specialty_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "public.advocates": {
       "name": "advocates",
       "schema": "",
@@ -46,7 +103,7 @@
         },
         "phone_number": {
           "name": "phone_number",
-          "type": "bigint",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
