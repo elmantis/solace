@@ -1,6 +1,6 @@
-import db from "../../../db";
 import { ilike, or } from "drizzle-orm";
 import { advocates } from '@/db/schema/advocates';
+import db from "../../../db";
 
 
 export async function GET(request: Request) {

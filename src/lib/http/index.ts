@@ -13,6 +13,7 @@ type API_HTTP = {
 
 const handleApiResponse = async (response: ApiResponse) => {
     const responseBody = await response.json()
+    if (!response.ok) throw new Error('An Error happened')
 
     return responseBody.data
 }

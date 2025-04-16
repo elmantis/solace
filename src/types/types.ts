@@ -21,3 +21,8 @@ export type Specialty = {
 export type AdvocatesSearch = {
     searchTerm?: string
 }
+
+export type UpdateAdvocateValues = {
+    firstName?: string;
+    lastName?: string;
+};
