@@ -1,20 +1,32 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { advocates, advocatesRelations } from "./schema/advocates";
+import { specialties, specialtiesRelations } from "./schema/specialties";
+import { advocateSpecialties, advocateSpecialtiesRelations } from "./schema/advocateSpecialties";
 
-const setup = () => {
+
+const initDb = () => {
   if (!process.env.DATABASE_URL) {
     console.error("DATABASE_URL is not set");
-    return {
-      select: () => ({
-        from: () => [],
-      }),
-    };
+
+    throw new Error("Database URL is not set");
   }
 
-  // for query purposes
   const queryClient = postgres(process.env.DATABASE_URL);
-  const db = drizzle(queryClient);
+  const db = drizzle(queryClient, {
+    schema: {
+      advocates,
+      specialties,
+      advocatesRelations,
+      specialtiesRelations,
+      advocateSpecialties,
+      advocateSpecialtiesRelations
+    }
+  });
+
   return db;
 };
 
-export default setup();
+const db = initDb();
+
+export default db 
