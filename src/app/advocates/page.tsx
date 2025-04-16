@@ -1,11 +1,11 @@
 "use client";
 
-import { Advocate, AdvocatesSearch } from "@/types/types";
 import { useEffect, useState } from "react";
 import { Card } from "flowbite-react";
 import AdvocatesTable from "@/components/AdvocatesTable";
 import AdvocateSearchForm from "../forms/AdvocateForm";
 import api from "@/services/api";
+import { Advocate, AdvocatesSearch } from "../../types/types";
 
 const Advocates = () => {
   const [advocates, setAdvocates] = useState<Advocate[]>([]);
