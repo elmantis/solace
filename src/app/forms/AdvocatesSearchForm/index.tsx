@@ -1,6 +1,8 @@
 import FormInput from "@/components/FormInput";
 import { AdvocatesSearch } from "@/types/types";
+import { debounce } from "@/utils/debounce";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -21,6 +23,7 @@ const AdvocateSearchForm: React.FC<AdvocateSearchFormProps> = ({
 }) => {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -28,6 +31,20 @@ const AdvocateSearchForm: React.FC<AdvocateSearchFormProps> = ({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
+
+  const watchedValues = watch();
+
+  useEffect(() => {
+    const debouncedSubmit = debounce(() => {
+      onSubmit(watchedValues);
+    }, 400);
+
+    debouncedSubmit();
+
+    return () => {
+      debouncedSubmit.cancel?.();
+    };
+  }, [watchedValues.searchTerm]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
