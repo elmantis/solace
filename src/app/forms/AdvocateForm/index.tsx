@@ -1,27 +1,21 @@
 import FormInput from "@/components/FormInput";
-import { UpdateAdvocateValues } from "../../../types/types";
+import { AdvocatesSearch } from "@/types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-import { Button, Card } from "flowbite-react";
 
-const schema = yup.object<UpdateAdvocateValues>({
-  firstName: yup
-    .string()
-    .matches(/^[A-Za-z ]*$/, "Please enter valid first name")
-    .optional(),
-  lastName: yup
-    .string()
-    .matches(/^[A-Za-z ]*$/, "Please enter valid last name")
-    .optional(),
+const schema = yup.object({
+  searchTerm: yup.string().matches(/^[A-Za-z ]*$/, "Please enter valid name"),
 });
 
-type AdvocateFormProps = {
-  initialValues: UpdateAdvocateValues;
-  onSubmit: (data: UpdateAdvocateValues) => void;
+type AdvocateSearchFormProps = {
+  initialValues: {
+    searchTerm: string;
+  };
+  onSubmit: (data: AdvocatesSearch) => void;
 };
 
-const AdvocateForm: React.FC<AdvocateFormProps> = ({
+const AdvocateSearchForm: React.FC<AdvocateSearchFormProps> = ({
   initialValues,
   onSubmit,
 }) => {
@@ -37,25 +31,14 @@ const AdvocateForm: React.FC<AdvocateFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex max-w-md flex-col gap-4">
-        <FormInput
-          register={register}
-          errors={errors}
-          name="firstName"
-          fieldLabel="First Name"
-        />
-        <FormInput
-          register={register}
-          errors={errors}
-          name="lastName"
-          fieldLabel="Last Name"
-        />
-        <Button color="alternative" type="submit">
-          Submit Form
-        </Button>
-      </div>
+      <FormInput
+        register={register}
+        errors={errors}
+        name="searchTerm"
+        fieldLabel="Search your advocate"
+      />
     </form>
   );
 };
 
-export default AdvocateForm;
+export default AdvocateSearchForm;

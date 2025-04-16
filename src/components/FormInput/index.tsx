@@ -20,7 +20,7 @@ const FormInput: React.FC<InputProps> = ({
   return (
     <div>
       <div className="mb-2 block">
-        <Label htmlFor={inputId}>{fieldLabel}</Label>
+        <Label htmlFor={inputId}>Search Table</Label>
       </div>
       <TextInput
         id={inputId}
