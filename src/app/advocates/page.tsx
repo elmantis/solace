@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Card } from "flowbite-react";
 import AdvocatesTable from "@/components/AdvocatesTable";
-import AdvocateSearchForm from "../forms/AdvocateForm";
+import AdvocateSearchForm from "../forms/AdvocatesSearchForm";
 import api from "@/services/api";
 import { Advocate, AdvocatesSearch } from "../../types/types";
 
